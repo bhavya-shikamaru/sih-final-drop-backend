@@ -19,7 +19,7 @@
 
 - [x] T001 Create the Mongoose schema and model for `RiskThreshold` in `src/models/config/Threshold.model.ts`.
 - [x] T002 Create the Zod validation schemas for threshold creation and updates in `src/validation/schemas/config.schema.ts`.
-- [ ] T003 Create the new router file for configuration at `src/routes/config.routes.ts`.
+- [x] T003 Create the new router file for configuration at `src/routes/config.routes.ts`.
 - [ ] T004 Mount the new config router in the main application router at `src/routes/index.ts`.
 
 **Checkpoint**: Foundation ready. The core data model and routing structure are in place.
