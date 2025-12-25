@@ -199,6 +199,7 @@ Expected response:
 | Academics  | Marks and attempts       |
 | Risk       | Risk assessment output   |
 | Uploads    | CSV ingestion            |
+| Config     | Dynamic risk threshold management (admin-only) |
 
 All endpoints are versioned under:
 

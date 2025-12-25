@@ -84,7 +84,7 @@
 **Purpose**: Final documentation and validation.
 
 - [x] T022 [P] Create/update a Postman collection with requests for all new `/api/v1/config/thresholds` endpoints.
-- [ ] T023 [P] Update the project's `README.md` or API documentation to include information about the new configuration feature and its endpoints.
+- [x] T023 [P] Update the project's `README.md` or API documentation to include information about the new configuration feature and its endpoints.
 - [ ] T024 Review all new code for adherence to project styling, conventions, and error handling patterns.
 
 ---
