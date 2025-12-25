@@ -62,4 +62,14 @@ export class ConfigService {
     
     return updatedThreshold;
   }
+
+  /**
+   * Retrieves a single risk threshold by its factor.
+   * @param factor The factor of the threshold to retrieve.
+   * @returns The risk threshold document, or null if not found.
+   */
+  async getThresholdByFactor(factor: string): Promise<IRiskThreshold | null> {
+    return this.configRepository.findByFactor(factor);
+  }
 }
+

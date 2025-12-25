@@ -52,7 +52,7 @@
 ### Implementation for User Story 2
 
 - [x] T011 [P] [US2] Add a `findByFactor` method to `config.repository.ts`.
-- [ ] T012 [P] [US2] Add a `getThresholdByFactor` method to `config.service.ts`.
+- [x] T012 [P] [US2] Add a `getThresholdByFactor` method to `config.service.ts`.
 - [ ] T013 [US2] Identify the `RiskService` (likely `src/controllers/risk.controller.ts` or a service it calls) and import the `ConfigService`.
 - [ ] T014 [US2] In the risk calculation logic, replace hardcoded values by fetching them from `ConfigService.getThresholdByFactor`.
 - [ ] T015 [US2] Implement the fallback logic in the risk calculation to use the default hardcoded values (e.g., Attendance < 75%) if the `ConfigService` does not return a value for a given factor.
