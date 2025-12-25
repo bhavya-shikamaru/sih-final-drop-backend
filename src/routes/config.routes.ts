@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { ConfigController } from '../controllers/config.controller';
 import { requireAdmin } from '../middlewares/auth.middleware'; // Assuming this exists or will be created
 import { validate } from '../middlewares/validation.middleware';
-import { createThresholdSchema, updateThresholdSchema, getThresholdSchema } from '../../validation/schemas/config.schema';
+import { createThresholdSchema, updateThresholdSchema, getThresholdSchema } from '../validation/schemas/config.schema';
 
 
 const router = Router();
