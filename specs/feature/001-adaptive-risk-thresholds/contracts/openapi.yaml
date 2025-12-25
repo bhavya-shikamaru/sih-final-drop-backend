@@ -1,0 +1,185 @@
+openapi: 3.0.0
+info:
+  title: "Configuration API"
+  version: "1.0.0"
+  description: "API for managing adaptive risk thresholds."
+
+paths:
+  /api/v1/config/thresholds:
+    get:
+      summary: "List all risk thresholds"
+      tags:
+        - Configuration
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: "A list of all risk threshold configurations."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RiskThreshold'
+        '401':
+          description: "Unauthorized."
+        '403':
+          description: "Forbidden. Admin role required."
+
+    post:
+      summary: "Create a new risk threshold"
+      tags:
+        - Configuration
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskThresholdInput'
+      responses:
+        '211':
+          description: "Threshold created successfully."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskThreshold'
+        '400':
+          description: "Bad Request. Validation failed."
+        '401':
+          description: "Unauthorized."
+        '403':
+          description: "Forbidden. Admin role required."
+        '409':
+          description: "Conflict. A threshold with this 'factor' already exists."
+
+    delete:
+      summary: "Reset all thresholds"
+      tags:
+        - Configuration
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: "All custom thresholds have been deleted."
+        '401':
+          description: "Unauthorized."
+        '403':
+          description: "Forbidden. Admin role required."
+
+  /api/v1/config/thresholds/{factor}:
+    parameters:
+      - name: factor
+        in: path
+        required: true
+        description: "The unique factor identifier of the threshold."
+        schema:
+          type: string
+
+    get:
+      summary: "Get a threshold by factor"
+      tags:
+        - Configuration
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: "The requested risk threshold."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskThreshold'
+        '401':
+          description: "Unauthorized."
+        '403':
+          description: "Forbidden. Admin role required."
+        '404':
+          description: "Not Found. Threshold with the specified factor not found."
+
+    put:
+      summary: "Update a threshold by factor"
+      tags:
+        - Configuration
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskThresholdUpdate'
+      responses:
+        '200':
+          description: "Threshold updated successfully."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskThreshold'
+        '400':
+          description: "Bad Request. Validation failed."
+        '401':
+          description: "Unauthorized."
+        '403':
+          description: "Forbidden. Admin role required."
+        '404':
+          description: "Not Found. Threshold with the specified factor not found."
+          
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    RiskThreshold:
+      type: object
+      properties:
+        factor:
+          type: string
+          example: "ATTENDANCE_PERCENTAGE_BELOW"
+        value:
+          type: number
+          example: 75
+        operator:
+          type: string
+          enum: [LT, GT, EQ]
+          example: "LT"
+        description:
+          type: string
+          example: "Flags students with attendance below 75%."
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    RiskThresholdInput:
+      type: object
+      required:
+        - factor
+        - value
+        - operator
+      properties:
+        factor:
+          type: string
+        value:
+          type: number
+        operator:
+          type: string
+          enum: [LT, GT, EQ]
+        description:
+          type: string
+
+    RiskThresholdUpdate:
+      type: object
+      properties:
+        value:
+          type: number
+        operator:
+          type: string
+          enum: [LT, GT, EQ]
+        description:
+          type: string
