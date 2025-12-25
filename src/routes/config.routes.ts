@@ -1,8 +1,12 @@
 import { Router } from 'express';
 import { ConfigController } from '../controllers/config.controller';
-import { requireAdmin } from '../middlewares/auth.middleware'; // Assuming this exists or will be created
-import { validate } from '../middlewares/validation.middleware';
-import { createThresholdSchema, updateThresholdSchema, getThresholdSchema } from '../validation/schemas/config.schema';
+import { requireAdmin } from '../middlewares/auth.middleware';
+import { validate, validateMultiple } from '../middlewares/validation.middleware';
+import { 
+  createThresholdBodySchema, 
+  updateThresholdBodySchema,
+  thresholdParamsSchema
+} from '../validation/schemas/config.schema';
 
 
 const router = Router();
@@ -12,15 +16,17 @@ const configController = new ConfigController();
 router.post(
   '/thresholds',
   requireAdmin,
-  validate(createThresholdSchema.body), // Assuming validate expects just the body schema
+  validate(createThresholdBodySchema, 'body'),
   configController.createThreshold
 );
 
 router.put(
   '/thresholds/:factor',
   requireAdmin,
-  validate(getThresholdSchema.params), // Validate params
-  validate(updateThresholdSchema.body), // Validate body
+  validateMultiple({
+    params: thresholdParamsSchema,
+    body: updateThresholdBodySchema,
+  }),
   configController.updateThreshold
 );
 
