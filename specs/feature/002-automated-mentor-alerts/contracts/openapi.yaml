@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: "Settings API"
+  version: "1.0.0"
+  description: "API for managing global application settings."
+
+paths:
+  /api/v1/settings/alerts:
+    get:
+      summary: "Get Alert System Status"
+      tags:
+        - Settings
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: "The current status of the alert system."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    example: "alerts_enabled"
+                  value:
+                    type: boolean
+                    example: true
+        '401':
+          description: "Unauthorized."
+        '403':
+          description: "Forbidden. Admin role required."
+
+    put:
+      summary: "Update Alert System Status"
+      tags:
+        - Settings
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  example: false
+      responses:
+        '200':
+          description: "Alert system status updated successfully."
+        '400':
+          description: "Bad Request. Validation failed."
+        '401':
+          description: "Unauthorized."
+        '403':
+          description: "Forbidden. Admin role required."
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
