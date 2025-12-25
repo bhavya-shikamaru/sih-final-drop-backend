@@ -70,7 +70,7 @@
 
 - [x] T016 [P] [US3] Implement `findAll` and `deleteAll` methods in `config.repository.ts`.
 - [x] T017 [P] [US3] Implement `getAllThresholds` and `resetAllThresholds` methods in `config.service.ts`.
-- [ ] T018 [P] [US3] Add `getAllThresholds` and `resetAllThresholds` handlers to `config.controller.ts`.
+- [x] T018 [P] [US3] Add `getAllThresholds` and `resetAllThresholds` handlers to `config.controller.ts`.
 - [ ] T019 [US3] In `src/routes/config.routes.ts`, define the `GET /thresholds` and `DELETE /thresholds` routes.
 - [ ] T020 [US3] Add 'admin' role authentication middleware to the new GET and DELETE routes.
 - [ ] T021 [US3] Implement audit logging within `config.service.ts` for the delete operation.

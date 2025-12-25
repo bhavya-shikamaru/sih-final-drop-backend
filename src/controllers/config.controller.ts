@@ -31,4 +31,14 @@ export class ConfigController {
 
     sendSuccess(res, updatedThreshold, 'Threshold updated successfully.');
   });
+
+  getAllThresholds = asyncHandler(async (req: Request, res: Response) => {
+    const thresholds = await this.configService.getAllThresholds();
+    sendSuccess(res, thresholds, 'Thresholds retrieved successfully.');
+  });
+
+  resetAllThresholds = asyncHandler(async (req: Request, res: Response) => {
+    const result = await this.configService.resetAllThresholds();
+    sendSuccess(res, result, 'All thresholds reset successfully.');
+  });
 }
