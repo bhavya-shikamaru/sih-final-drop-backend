@@ -25,7 +25,7 @@ router.put(
 );
 
 // Define routes for User Story 3 (T019)
-router.get('/thresholds', configController.getAllThresholds);
-router.delete('/thresholds', configController.resetAllThresholds);
+router.get('/thresholds', requireAdmin, configController.getAllThresholds);
+router.delete('/thresholds', requireAdmin, configController.resetAllThresholds);
 
 export default router;
